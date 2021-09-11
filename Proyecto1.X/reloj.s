@@ -107,12 +107,12 @@ ORG 100h
     retlw   00000111B  ;7
     retlw   01111111B  ;8
     retlw   01100111B  ;9
-    retlw   01110111B  ;A
+   /*retlw   01110111B  ;A
     retlw   01111100B  ;B
     retlw   00111001B  ;C
     retlw   01011110B  ;D
     retlw   01111001B  ;E
-    retlw   01110001B  ;F
+    retlw   01110001B  ;F*/
    
 ;   CODIGO PRINCIPAL
     
@@ -123,7 +123,7 @@ main:
     banksel PORTA
     
 loop:
-    movlw   0x24
+    movlw   0x59
     movwf   var 
     
     call    separar_nibbles
@@ -138,7 +138,7 @@ separar_nibbles:
     movwf   nibble
     swapf   var, W
     andlw   0x0f
-    movwf    nibble+1
+    movwf   nibble+1
     return
  
 preparar_displays:
