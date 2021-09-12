@@ -30,15 +30,6 @@ reinicio_tmr0 macro ;macro para el reinicio del tmr 0
  bcf	T0IF	    ;se resetea el T0IF
  endm
 
-/*reinicio_tmr1 macro
- banksel TMR1H	    ;se llama al bank del timer1
- movlw  0xB	    ;valor inicial que sera colocado en el tmr1
- movwf  TMR1H
- movlw	0x98
- movwf	TMR1L
- bcf	TMR1IF
- endm*/
- 
 PSECT	udata_bank0 
   BANDERAS_HORA:	DS  1
   BANDERA_MINUTO:	DS  1  
@@ -109,7 +100,7 @@ pop:
 ;   TABLA
 PSECT code, delta=2, abs
 ORG 100h
-  tabla:
+  TABLA_7SEG:
     clrf    PCLATH
     bsf	    PCLATH, 0   ;PCLATH = 01
     andlw   0x0f
@@ -1580,11 +1571,142 @@ ___CC10:
  
  ;   ----------------------------------------------------
  
- 
+ TOGGLE_B2:
+    movf   SELE,0
+    xorlw  5
+    btfss   STATUS, 2
+    goto    ___MODODOS
+    goto    ___MODOUNO
+___MODODOS:
+    movf   SELE,0
+    xorlw  2
+    btfss   STATUS, 2
+    return
+    goto    ___MODOUNO 
+    
+___MODOUNO:    
+    movf       BANDERAS_DIAS, 0
+    xorlw      0
+    btfss      STATUS, 2
+    goto    __DDD2	   ;No
+    goto    TOG___0	    ;Si   
+TOG___0:
+    movlw   1
+    movwf   BANDERAS_DIAS
+    return   
+__DDD2:
+    movf       BANDERAS_DIAS, 0
+    xorlw      1
+    btfss      STATUS, 2
+    goto    __DDD3	    ;No
+    goto    TOG___1	    ;Si    
+    
+TOG___1:
+    movlw   2
+    movwf   BANDERAS_DIAS
+    return
+__DDD3:
+    movf       BANDERAS_DIAS, 0
+    xorlw      2
+    btfss      STATUS, 2
+    goto     __DDD4	    ;No
+    goto    TOG___2	    ;Si    
+    
+TOG___2:
+    movlw   3
+    movwf   BANDERAS_DIAS
+    return
+__DDD4:
+    movf       BANDERAS_DIAS, 0
+    xorlw      3
+    btfss      STATUS, 2
+    goto     TOGGLE_B2	    ;No
+    goto    TOG___3	    ;Si    
+TOG___3:
+    movlw   0
+    movwf   BANDERAS_DIAS
+    return
  
  ;   ---------------------------------------------------- 
   
- 
+DISPLAY_VAR_FECHA:
+    movf   SELE,0
+    xorlw  5
+    btfss   STATUS, 2
+    goto    __MOODODOS
+    goto    __MOODOUNO
+__MOODODOS:
+    movf   SELE,0
+    xorlw  2
+    btfss   STATUS, 2
+    return
+    goto    __MOODOUNO
+__MOODOUNO:    
+    clrf    PORTD
+    movf       BANDERAS_DIAS, 0
+    xorlw      0
+    btfss      STATUS, 2
+    goto    ____D22
+    goto    DISPLAY___0
+DISPLAY___0:
+    MOVFW    VAR_DISPLAY_DIA_DECENA
+    call    TABLA_7SEG
+    movwf   PORTC
+    bsf	    PORTD, 2
+    bcf	    PORTD, 0
+    bcf	    PORTD, 1
+    bcf	    PORTD, 3
+    goto    DISP___FIN
+____D22:
+    movf       BANDERAS_DIAS, 0
+    xorlw      1
+    btfss      STATUS, 2
+    goto    ____D33
+    goto    DISPLAY___1    
+DISPLAY___1:
+    MOVFW   VAR_DISPLAY_DIA_UNIDAD
+    call    TABLA_7SEG
+    movwf   PORTC
+    bsf	    PORTD, 3 
+    bcf	    PORTD, 0
+    bcf	    PORTD, 1
+    bcf	    PORTD, 2    
+    goto    DISP___FIN 
+____D33:
+    movf       BANDERAS_DIAS, 0
+    xorlw      .2
+    btfss      STATUS, 2
+    goto    ____D44
+    goto    DISPLAY___2    
+DISPLAY___2:
+    MOVFW   VAR_DISPLAY_MES_DECENA
+    call    TABLA_7SEG
+    movwf   PORTC
+    bsf	    PORTD, 1 
+    bcf	    PORTD, 0
+    bcf	    PORTD, 2
+    bcf	    PORTD, 3    
+    goto    DISP___FIN 
+    
+____D44:
+    movf       BANDERAS_DIAS, 0
+    xorlw      3
+    btfss      STATUS, 2
+    goto    DISPLAY_VAR_FECHA
+    goto    DISPLAY___3    
+DISPLAY___3:
+    MOVFW    VAR_DISPLAY_MES_UNIDAD
+    call    TABLA_7SEG
+    movwf   PORTC
+    bsf	    PORTD, 0 
+    bcf	    PORTD, 2
+    bcf	    PORTD, 1
+    bcf	    PORTD, 3    
+    goto    DISP___FIN 
+    
+DISP___FIN:  
+    call    TOGGLE_B2
+    return   
   
  ;   ---------------------------------------------------- 
    
