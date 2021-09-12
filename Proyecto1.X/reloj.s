@@ -678,7 +678,7 @@ _INCREMENTO_MINUTO2: ;60*2 = 120, MODO1
     movf   VAR_DISPLAY_HORA_UNIDAD, 0
     movwf  PORTC 
     
-_CMIN2    
+_CMIN2:    
     movf    H0, 0
     xorlw   24
     btfss STATUS, 2 
@@ -702,6 +702,17 @@ _CMIN2
     
 ;   ----------------------------------------------------     
 
+ _PARPADEO_LED: ;LED INDICANDO 500ms 
+    btfss   PORTD, 5
+    goto    ON
+    goto    OFF
+OFF
+    bcf	    PORTD, 5
+    return
+ON
+    bsf	    PORTD, 5
+    return   
+    
 ;   ----------------------------------------------------       
     
     
@@ -741,8 +752,8 @@ _CMIN2
 config_reloj:
     banksel OSCCON
     bsf	    IRCF2
-    bcf	    IRCF1
-    bsf	    IRCF0   ;4Mhz
+    bsf	    IRCF1
+    bcf	    IRCF0   ;4Mhz
     bsf	    SCS
     return
 
@@ -785,8 +796,46 @@ config_io:
     clrf    PORTC
     clrf    PORTD
 
+    ;variables empiezan en cero
+    clrf    VAR_DISPLAY_MINUTO_UNIDAD
+    clrf    VAR_DISPLAY_MINUTO_DECENA
+    clrf    VAR_DISPLAY_HORA_DECENA
+    clrf    VAR_DISPLAY_HORA_UNIDAD
+    clrf    BANDERAS_HORA
+    clrf    BANDERAS_MINUTO
+    clrf    BANDERAS_MINUTO2
+    clrf    VAR_DISPLAY_MINUTO2_UNIDAD
+    clrf    VAR_DISPLAY_MINUTO2_DECENA
+    clrf    VAR_DISPLAY_SEGUNDO_UNIDAD
+    clrf    VAR_DISPLAY_SEGUNDO_DECENA
+    clrf    H0
+    clrf    MIN
+    clrf    M2
+    clrf    S1
+    clrf    MIN3
+    clrf    COUNT10
+    clrf    COUNT20
+    clrf    BANDERAS_DIAS
+    clrf    VAR_DISPLAY_DIA_DECENA
+    clrf    VAR_DISPLAY_MES_DECENA
+    clrf    VAR_DISPLAY_DIA_UNIDAD
+    clrf    VAR_DISPLAY_MES_UNIDAD    
+    clrf    SEG
+    clrf    M0
+    BANKSEL SELE
+    clrf    SELE
     return
-       
+    
+_S:       
+    movf   SELE,0
+    xorlw  0
+    btfss   STATUS, 2
+    return
+
+    movlw   1
+    movwf   SELE
+    movf    SELE,0
+    movwf   PORTB       
 END
 
 
