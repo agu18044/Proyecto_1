@@ -25,30 +25,48 @@ PROCESSOR 16F887
   
 reinicio_tmr0 macro ;macro para el reinicio del tmr 0
  banksel PORTA	    ;se llama al bank
- movlw  10	    ;valor inicial que sera colocado en el tmr0
+ movlw  240	    ;valor inicial que sera colocado en el tmr0
  movwf  TMR0
  bcf	T0IF	    ;se resetea el T0IF
  endm
 
-reinicio_tmr1 macro
+/*reinicio_tmr1 macro
  banksel TMR1H	    ;se llama al bank del timer1
  movlw  0xB	    ;valor inicial que sera colocado en el tmr1
  movwf  TMR1H
  movlw	0x98
  movwf	TMR1L
  bcf	TMR1IF
- endm
+ endm*/
  
 PSECT	udata_bank0 
-  var:		DS  1
-  banderas:	DS  1  
-  display_var:	DS  4
-  UNIDADES:	DS  1
-  DECENAS:	DS  1
-  cont1:	DS  1
-  cont:		DS  1
-  bandera2:	DS  1
-  
+  BANDERAS_HORA:	DS  1
+  BANDERA_MINUTO:	DS  1  
+  BANDERA_MINUTO2:	DS  1
+  BANDERA_DIAS:		DS  1
+  COUNT10:		DS  1
+  COUNT20:		DS  1
+  MIN:			DS  1
+  M2:			DS  1
+  SEG:			DS  1
+  H0:			DS  1
+  MIN3:			DS  1  
+  M0:			DS  1  
+  S1:			DS  1  
+  SELE:			DS 1	
+ VAR_DISPLAY_HORA_UNIDAD:	DS 1
+ VAR_DISPLAY_HORA_DECENA:	DS 1
+ VAR_DISPLAY_SEGUNDO_UNIDAD:	DS 1
+ VAR_DISPLAY_SEGUNDO_DECENA:	DS 1
+ VAR_DISPLAY_MINUTO2_UNIDAD:	DS 1
+ VAR_DISPLAY_MINUTO2_DECENA:	DS 1
+ VAR_DISPLAY_DIA_UNIDAD:	DS 1
+ VAR_DISPLAY_MES_UNIDAD:	DS 1
+ VAR_DISPLAY_DIA_DECENA:	DS 1  
+ VAR_DISPLAY_MES_DECENA:	DS 1    
+ VAR_DISPLAY_MINUTO_UNIDAD:	DS 1	
+ VAR_DISPLAY_MINUTO_DECENA:	DS 1
+    
 ;   VARIABLES  
 PSECT udata_shr
  W_TEMP:	DS 1
@@ -71,84 +89,23 @@ push:
     
 isr: 
     btfsc   T0IF
-    call    int_t0
-    btfsc   TMR1IF
-    call    int_t1
+    goto    pop
+    reinicio_tmr0
+    call    DISPLAY_VAR_HORA    
+    call    DISPLAY_VAR_TIMER 
+    call    DISPLAY_VAR_FECHA
+    call    COUNT_10
+    call    COUNT_20
+    call    _INCREMENTO_MINUTO2  
+    call    _INCREMENTO_SEGUNDO2 
+    
 pop:
    swapf    STATUS_TEMP 
    movf	    STATUS
    swapf    W_TEMP, F
    swapf    W_TEMP, W
    retfie
-   
-   
-;   SUB RUTINAS DE INTERRUPT    
-int_t0:
-    reinicio_tmr0
-    clrf    PORTD
-    incf    banderas
-    return
-    /*incf    banderas
-    btfsc   banderas, 0
-    goto    display_1
-    
-    btfsc   banderas, 1
-    goto    display_2
-    
-    btfsc   banderas, 2
-    goto    display_3
-    
-       
-display_0:
-    movf    display_var, W
-    movwf   PORTC
-    bsf	    PORTD,0
-    goto    siguiente_display
-    
-display_1:
-    movf    display_var+1, W
-    movwf   PORTC
-    bsf	    PORTD,1
-    goto    siguiente_display1
-    
-display_2:
-    movf    display_var+2, W
-    movwf   PORTC
-    bsf	    PORTD,2
-    goto    siguiente_display2
-    
-display_3:
-    movf    display_var+3, W
-    movwf   PORTC
-    bsf	    PORTD,3
-    goto    siguiente_display3
-    
-siguiente_display: 
-    movlw   1
-    xorwf   banderas, F 
-    return
-    
-siguiente_display1: 
-    movlw   3
-    xorwf   banderas, F 
-    return
-
-siguiente_display2: 
-    movlw   6
-    xorwf   banderas, F 
-    return
-    
-siguiente_display3: 
-    movlw   4
-    xorwf   banderas, F 
-    return*/
-    
-int_t1:
-    reinicio_tmr1
-    incf    UNIDADES
-    incf    cont
-    return
-    
+      
 ;   TABLA
 PSECT code, delta=2, abs
 ORG 100h
@@ -175,82 +132,29 @@ main:
     call    config_io
     call    config_reloj
     call    config_tmr0
-    call    config_tmr1
     call    config_int
     banksel PORTA
     
 loop:
-    ;clrf    PORTD
-    btfsc   banderas,0
-    call    segundo1
+    btfsc   PORTA, 0
+    call    push_uno
     
-    btfsc   banderas, 1
-    call    segundo2
+    btfsc   PORTA, 1
+    call    push_dos
     
-    btfsc   banderas, 2
-    call    minuto1
+    btfsc   PORTA, 2
+    call    push_tres
     
-    ;call    preparar_displays
+    btfsc   PORTA, 3
+    call    push_cuatro
     
-    clrf    bandera2
-    movf    cont1, W
-    movwf   PORTB
+    btfsc   PORTA, 4
+    call    push_cinco
 
     goto    loop
 
 ;   SUB RUTINAS 
 
-segundo1:
-    bsf	    PORTD,0
-    movf    UNIDADES, W
-    call    tabla
-    movwf   display_var+0
-    movf    display_var+0, W
-    movwf   PORTC
-    movlw   3
-    xorwf   banderas, F 
-    return
-    
-segundo2:
-    bsf	    PORTD,1
-    movf    UNIDADES, W
-    movlw   bandera2
-    movf    bandera2, W
-    sublw   10
-    btfsc   STATUS, 2
-    call    display1_inc
-    movf    DECENAS, W
-    call    tabla
-    movwf   display_var+1
-    movf    display_var+1, W
-    movwf   PORTC
-    movlw   4
-    xorwf   banderas, F 
-    return
-
-minuto1:
-    movf    cont, W
-    movlw   bandera2
-    movf    cont, W
-    sublw   16
-    btfsc   ZERO
-    call    display2_inc
-    movf    cont1, W
-    call    tabla
-    movwf   display_var+2
-    return
-    
-display1_inc:
-    incf    DECENAS
-    clrf    UNIDADES
-    return
-    
-display2_inc:
-    incf    cont1
-    clrf    DECENAS
-    clrf    UNIDADES
-    clrf    cont
-    return
         
 config_reloj:
     banksel OSCCON
@@ -271,26 +175,11 @@ config_tmr0:
     reinicio_tmr0
     return
     
-config_tmr1:    
-    banksel T1CON  
-    bcf	    TMR1GE
-    bsf	    T1CKPS1	; Prescaler de 11   rate 1:8
-    bsf	    T1CKPS0	;
-    bcf	    T1OSCEN
-    bcf	    TMR1CS     ; Se utiliza reloj interno
-    bsf	    TMR1ON     ; Se activa timer1
-    reinicio_tmr1
-    return
     
 config_int:
-    banksel TRISA
-    bsf	    TMR1IE
-    banksel PORTA
-    bsf	    T0IE	; TMR0
-    bcf	    T0IF	;
-    bcf	    TMR1IF	; TMR
-    bsf	    PEIE	;
-    bsf	    GIE		
+    bsf	    GIE		;INTCON
+    bsf	    T0IE
+    bsf	    T0IF	
     return
     
 config_io:
@@ -299,23 +188,21 @@ config_io:
     clrf    ANSELH
     
     banksel TRISA
+    movlw   b'00011111'
+    movwf   TRISA
+    clrf    TRISB
     clrf    TRISC
     bcf	    TRISD, 0
     bcf	    TRISD, 1
     bcf	    TRISD, 2
     bcf	    TRISD, 3
-    clrf    TRISB
     
     banksel PORTA
+    clrf    PORTA
+    clrf    PORTC
     clrf    PORTC
     clrf    PORTD
-    clrf    PORTB
-    clrf    UNIDADES
-    clrf    DECENAS
-    clrf    cont1
-    clrf    banderas
-    clrf    cont
-    clrf    bandera2
+
     return
        
 END
