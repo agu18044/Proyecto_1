@@ -301,7 +301,56 @@ PUSH_CINCO:
     return     
     
 ;   ----------------------------------------------------
-   
+ 
+SELECTOR: 
+    incf    SELE, 1
+    movf    SELE, 0
+    btfss   STATUS, 2
+    goto    _S1
+_S1:    
+    movf   SELE,0
+    xorlw  2
+    btfss   STATUS, 2
+    goto    _S2
+    movlw   b'00000010'
+    movfw   PORTB  
+_S2:    
+    movf   SELE,0
+    xorlw  3
+    btfss   STATUS, 2
+    goto    _S3
+    movlw   b'00000100'
+    movwf   PORTB
+_S3:    
+    movf   SELE,0
+    xorlw  4
+    btfss   STATUS, 2
+    goto    _S4
+    movlw   b'00001000'
+    movfw   PORTB
+_S4:
+    movf   SELE,0
+    xorlw  5
+    btfss   STATUS, 2
+    goto    _S5
+    movlw   b'00010000'
+    movfw   PORTB    
+_S5:    
+    movf   SELE,0
+    xorlw  6
+    btfss   STATUS, 2
+    goto    _S6
+    movlw   b'00100000'
+    movfw   PORTB    
+_S6:    
+    movf   SELE,0
+    xorlw  7
+    btfss   STATUS, 2
+    return
+    movlw   b'00000000'
+    movfw   SELE 
+    goto    _S
+    return
     
 ;   ----------------------------------------------------       
 
