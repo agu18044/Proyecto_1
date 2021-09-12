@@ -266,9 +266,50 @@ DISP_FIN:
     
 ;   ----------------------------------------------------
    
+PUSH_UNO:
+    btfsc   PORTA, 0
+    goto    $-1
+    call    INCREMENTO_HORA
+    call    INCREMENTO_MINUTO2
+    return
+
+PUSH_DOS:
+    btfsc   PORTA, 1
+    goto    $-1
+    call    DECREMENTO_HORA
+    call    DECREMENTO_MINUTO2
+    return
     
+PUSH_TRES:
+    btfsc   PORTA, 2
+    goto    $-1
+    call    INCREMENTO_MINUTO
+    call    INCREMENTO_SEGUNDO
+    return
+
+PUSH_CUATRO:
+    btfsc   PORTA, 3
+    goto    $-1
+    call    DECREMENTO_MINUTO
+    call    DECREMENTO_SEGUNDO
+    return
+    
+PUSH_CINCO:
+    btfsc   PORTA, 4
+    goto    $-1
+    call    SELECTOR
+    return     
+    
+;   ----------------------------------------------------
+   
     
 ;   ----------------------------------------------------       
+
+    
+;   ----------------------------------------------------       
+    
+    
+;   ----------------------------------------------------           
 config_reloj:
     banksel OSCCON
     bsf	    IRCF2
