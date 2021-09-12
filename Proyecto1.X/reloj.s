@@ -32,14 +32,14 @@ reinicio_tmr0 macro ;macro para el reinicio del tmr 0
 
 PSECT	udata_bank0 
   BANDERAS_HORA:	DS  1
-  BANDERA_MINUTO:	DS  1  
-  BANDERA_MINUTO2:	DS  1
-  BANDERA_DIAS:		DS  1
+  BANDERAS_MINUTO:	DS  1  
+  BANDERAS_MINUTO2:	DS  1
+  BANDERAS_DIAS:		DS  1
   COUNT10:		DS  1
   COUNT20:		DS  1
   MIN:			DS  1
   M2:			DS  1
-  SEG:			DS  1
+  SEG1:			DS  1
   H0:			DS  1
   MIN3:			DS  1  
   M0:			DS  1  
@@ -128,19 +128,19 @@ main:
     
 loop:
     btfsc   PORTA, 0
-    call    push_uno
+    call    PUSH_UNO
     
     btfsc   PORTA, 1
-    call    push_dos
+    call    PUSH_DOS
     
     btfsc   PORTA, 2
-    call    push_tres
+    call    PUSH_TRES
     
     btfsc   PORTA, 3
-    call    push_cuatro
+    call    PUSH_CUATRO
     
     btfsc   PORTA, 4
-    call    push_cinco
+    call    PUSH_CINCO
 
     goto    loop
 
@@ -164,7 +164,7 @@ _D2:
     
 TOG_1:
     movlw   2
-    movfw   BANDERAS_HORA
+    movwf   BANDERAS_HORA
     return
 _D3:
     movf       BANDERAS_HORA, 0
@@ -175,7 +175,7 @@ _D3:
     
 TOG_2:
     movlw   3
-    movfw   BANDERAS_HORA
+    movwf  BANDERAS_HORA
     return
 _D4:
     movf       BANDERAS_HORA, 0
@@ -185,7 +185,7 @@ _D4:
     goto    TOG_3	;Si    
 TOG_3:
     movlw   0
-    movfw   BANDERAS_HORA
+    movwf   BANDERAS_HORA
     return 
 ;   ----------------------------------------------------
    
@@ -197,13 +197,13 @@ DISPLAY_VAR_HORA:
     goto    __D2
     goto    DISPLAY_0
 DISPLAY_0:
-    movfw    VAR_DISPLAY_HORA_DECENA
+    movf    VAR_DISPLAY_HORA_DECENA, W
     call    TABLA_7SEG
     movwf   PORTC
-    bsf	    PORTD, RD2
-    bcf	    PORTD, RD0
-    bcf	    PORTD, RD1
-    bcf	    PORTD, RD3
+    bsf	    PORTD, 2
+    bcf	    PORTD, 0
+    bcf	    PORTD, 1
+    bcf	    PORTD, 3
     goto    DISP_FIN
 __D2:
     movf       BANDERAS_HORA, 0
@@ -212,13 +212,13 @@ __D2:
     goto    __D3
     goto    DISPLAY_1    
 DISPLAY_1:
-    movfw    VAR_DISPLAY_HORA_UNIDAD
+    movf    VAR_DISPLAY_HORA_UNIDAD, W
     call    TABLA_7SEG
     movwf   PORTC
-    bsf	    PORTD, RD3 
-    bcf	    PORTD, RD0
-    bcf	    PORTD, RD1
-    bcf	    PORTD, RD2    
+    bsf	    PORTD, 3 
+    bcf	    PORTD, 0
+    bcf	    PORTD, 1
+    bcf	    PORTD, 2    
     goto    DISP_FIN 
 __D3:
     movf       BANDERAS_HORA, 0
@@ -227,13 +227,13 @@ __D3:
     goto    __D4
     goto    DISPLAY_2    
 DISPLAY_2:
-    movfw    VAR_DISPLAY_MINUTO_DECENA
+    movf    VAR_DISPLAY_MINUTO_DECENA, W
     call    TABLA_7SEG
     movwf   PORTC
-    bsf	    PORTD, RD1 
-    bcf	    PORTD, RD0
-    bcf	    PORTD, RD2
-    bcf	    PORTD, RD3    
+    bsf	    PORTD, 1 
+    bcf	    PORTD, 0
+    bcf	    PORTD, 2
+    bcf	    PORTD, 3    
     goto    DISP_FIN     
 __D4:
     movf       BANDERAS_HORA, 0
@@ -242,13 +242,13 @@ __D4:
     goto    DISPLAY_VAR_HORA
     goto    DISPLAY_3    
 DISPLAY_3:
-    movfw    VAR_DISPLAY_MINUTO_UNIDAD
+    movf    VAR_DISPLAY_MINUTO_UNIDAD, W
     call    TABLA_7SEG
     movwf   PORTC
-    bsf	    PORTD, RD0 
-    bcf	    PORTD, RD2
-    bcf	    PORTD, RD1
-    bcf	    PORTD, RD3    
+    bsf	    PORTD, 0 
+    bcf	    PORTD, 2
+    bcf	    PORTD, 1
+    bcf	    PORTD, 3    
     goto    DISP_FIN 
     
 DISP_FIN:  
@@ -303,43 +303,43 @@ _S1:
     xorlw  2
     btfss   STATUS, 2
     goto    _S2
-    movlw   b'00000010'
-    movfw   PORTB  
+    movlw   00000010B
+    movwf   PORTB  
 _S2:    
     movf   SELE,0
     xorlw  3
     btfss   STATUS, 2
     goto    _S3
-    movlw   b'00000100'
+    movlw   00000100B
     movwf   PORTB
 _S3:    
     movf   SELE,0
     xorlw  4
     btfss   STATUS, 2
     goto    _S4
-    movlw   b'00001000'
-    movfw   PORTB
+    movlw   00001000B
+    movwf   PORTB
 _S4:
     movf   SELE,0
     xorlw  5
     btfss   STATUS, 2
     goto    _S5
-    movlw   b'00010000'
-    movfw   PORTB    
+    movlw   00010000B
+    movwf   PORTB    
 _S5:    
     movf   SELE,0
     xorlw  6
     btfss   STATUS, 2
     goto    _S6
-    movlw   b'00100000'
-    movfw   PORTB    
+    movlw   00100000B
+    movwf   PORTB    
 _S6:    
     movf   SELE,0
     xorlw  7
     btfss   STATUS, 2
     return
-    movlw   b'00000000'
-    movfw   SELE 
+    movlw   00000000B
+    movwf   SELE 
     goto    _S
     return
     
@@ -785,7 +785,7 @@ __MODOUNO:
     goto    ____D2
     goto    DISPLAY__0
 DISPLAY__0:
-    MOVFW    VAR_DISPLAY_MINUTO2_DECENA
+    movf    VAR_DISPLAY_MINUTO2_DECENA, W
     call    TABLA_7SEG
     movwf   PORTC
     bsf	    PORTD, 2
@@ -800,7 +800,7 @@ ____D2:
     goto    ____D3
     goto    DISPLAY__1    
 DISPLAY__1:
-    MOVFW   VAR_DISPLAY_MINUTO2_UNIDAD
+    movf   VAR_DISPLAY_MINUTO2_UNIDAD, W
     call    TABLA_7SEG
     movwf   PORTC
     bsf	    PORTD, 3 
@@ -815,7 +815,7 @@ ____D3:
     goto    ____D4
     goto    DISPLAY__2    
 DISPLAY__2:
-    MOVFW   VAR_DISPLAY_SEGUNDO_DECENA
+    movf   VAR_DISPLAY_SEGUNDO_DECENA, W
     call    TABLA_7SEG
     movwf   PORTC
     bsf	    PORTD, 1 
@@ -830,7 +830,7 @@ ____D4:
     goto    DISPLAY_VAR_TIMER
     goto    DISPLAY__3    
 DISPLAY__3:
-    MOVFW    VAR_DISPLAY_SEGUNDO_UNIDAD
+    movf    VAR_DISPLAY_SEGUNDO_UNIDAD, W
     call    TABLA_7SEG
     movwf   PORTC
     bsf	    PORTD, 0 
@@ -1257,20 +1257,20 @@ __CS7:
  ;   ---------------------------------------------------- 
  
 _INCREMENTO_SEGUNDO:	; Incrementando la variable seg cada 500ms 1segundo MODO6
-    incf    SEG, 1
-    btfss   STATUS, Z	 
+    incf    SEG1, 1
+    btfss   STATUS, 2	 
     return
-    clrf    SEG
+    clrf    SEG1
     return
  
  ;   ---------------------------------------------------- 
  
 _INCREMENTO_SEGUNDO2:
-    movf    SEG, 0
+    movf    SEG1, 0
     xorlw   2
     btfss   STATUS, 2
     return
-    clrf    SEG
+    clrf    SEG1
     decf    VAR_DISPLAY_SEGUNDO_DECENA, 1
     decf    S1,1
     movf    S1,0
@@ -1293,7 +1293,7 @@ ___CSS0:
     btfss STATUS, 2 
     goto    ___CSS2
     
-    bcf	  PORTE, RE0
+    bcf	  PORTE, 0
     clrf   VAR_DISPLAY_SEGUNDO_UNIDAD
     movf   VAR_DISPLAY_SEGUNDO_UNIDAD, 0
     movwf PORTC
@@ -1649,7 +1649,7 @@ __MOODOUNO:
     goto    ____D22
     goto    DISPLAY___0
 DISPLAY___0:
-    MOVFW    VAR_DISPLAY_DIA_DECENA
+    movf    VAR_DISPLAY_DIA_DECENA, W
     call    TABLA_7SEG
     movwf   PORTC
     bsf	    PORTD, 2
@@ -1664,7 +1664,7 @@ ____D22:
     goto    ____D33
     goto    DISPLAY___1    
 DISPLAY___1:
-    MOVFW   VAR_DISPLAY_DIA_UNIDAD
+    movf   VAR_DISPLAY_DIA_UNIDAD, W
     call    TABLA_7SEG
     movwf   PORTC
     bsf	    PORTD, 3 
@@ -1674,12 +1674,12 @@ DISPLAY___1:
     goto    DISP___FIN 
 ____D33:
     movf       BANDERAS_DIAS, 0
-    xorlw      .2
+    xorlw      2
     btfss      STATUS, 2
     goto    ____D44
     goto    DISPLAY___2    
 DISPLAY___2:
-    MOVFW   VAR_DISPLAY_MES_DECENA
+    movf   VAR_DISPLAY_MES_DECENA, W
     call    TABLA_7SEG
     movwf   PORTC
     bsf	    PORTD, 1 
@@ -1695,7 +1695,7 @@ ____D44:
     goto    DISPLAY_VAR_FECHA
     goto    DISPLAY___3    
 DISPLAY___3:
-    MOVFW    VAR_DISPLAY_MES_UNIDAD
+    movf    VAR_DISPLAY_MES_UNIDAD, W
     call    TABLA_7SEG
     movwf   PORTC
     bsf	    PORTD, 0 
@@ -1745,7 +1745,7 @@ config_io:
     clrf    ANSELH
     
     banksel TRISA
-    movlw   b'00011111'
+    movlw   00011111B
     movwf   TRISA
     clrf    TRISB
     clrf    TRISC
@@ -1784,7 +1784,7 @@ config_io:
     clrf    VAR_DISPLAY_MES_DECENA
     clrf    VAR_DISPLAY_DIA_UNIDAD
     clrf    VAR_DISPLAY_MES_UNIDAD    
-    clrf    SEG
+    clrf    SEG1
     clrf    M0
     BANKSEL SELE
     clrf    SELE
