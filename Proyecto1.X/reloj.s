@@ -198,9 +198,77 @@ TOG_3:
     return 
 ;   ----------------------------------------------------
    
-
+DISPLAY_VAR_HORA:
+    clrf    PORTD
+    movf       BANDERAS_HORA, 0
+    xorlw      0
+    btfss      STATUS, 2
+    goto    __D2
+    goto    DISPLAY_0
+DISPLAY_0:
+    movfw    VAR_DISPLAY_HORA_DECENA
+    call    TABLA_7SEG
+    movwf   PORTC
+    bsf	    PORTD, RD2
+    bcf	    PORTD, RD0
+    bcf	    PORTD, RD1
+    bcf	    PORTD, RD3
+    goto    DISP_FIN
+__D2:
+    movf       BANDERAS_HORA, 0
+    xorlw      1
+    btfss      STATUS, 2
+    goto    __D3
+    goto    DISPLAY_1    
+DISPLAY_1:
+    movfw    VAR_DISPLAY_HORA_UNIDAD
+    call    TABLA_7SEG
+    movwf   PORTC
+    bsf	    PORTD, RD3 
+    bcf	    PORTD, RD0
+    bcf	    PORTD, RD1
+    bcf	    PORTD, RD2    
+    goto    DISP_FIN 
+__D3:
+    movf       BANDERAS_HORA, 0
+    xorlw      2
+    btfss      STATUS, 2
+    goto    __D4
+    goto    DISPLAY_2    
+DISPLAY_2:
+    movfw    VAR_DISPLAY_MINUTO_DECENA
+    call    TABLA_7SEG
+    movwf   PORTC
+    bsf	    PORTD, RD1 
+    bcf	    PORTD, RD0
+    bcf	    PORTD, RD2
+    bcf	    PORTD, RD3    
+    goto    DISP_FIN     
+__D4:
+    movf       BANDERAS_HORA, 0
+    xorlw      3
+    btfss      STATUS, 2
+    goto    DISPLAY_VAR_HORA
+    goto    DISPLAY_3    
+DISPLAY_3:
+    movfw    VAR_DISPLAY_MINUTO_UNIDAD
+    call    TABLA_7SEG
+    movwf   PORTC
+    bsf	    PORTD, RD0 
+    bcf	    PORTD, RD2
+    bcf	    PORTD, RD1
+    bcf	    PORTD, RD3    
+    goto    DISP_FIN 
     
-;   ----------------------------------------------------    
+DISP_FIN:  
+    call    TOGGLE_B0
+    return  
+    
+;   ----------------------------------------------------
+   
+    
+    
+;   ----------------------------------------------------       
 config_reloj:
     banksel OSCCON
     bsf	    IRCF2
