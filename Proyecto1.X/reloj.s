@@ -376,7 +376,7 @@ INCREMENTO_HORA:
     movf   VAR_DISPLAY_HORA_UNIDAD, 0
     movwf  PORTC 
     
-_C1    
+_C1:    
     movf    H0, 0
     xorlw   24
     btfss STATUS, 2 
@@ -423,7 +423,7 @@ DECREMENTO_HORA:
     movf   VAR_DISPLAY_HORA_DECENA, 0
     movwf PORTC    
 
-_C2   
+_C2:   
     movf    H0, 0
     xorlw   255
     btfss STATUS, 2 
@@ -442,7 +442,7 @@ _C2
     movwf  H0
     movf   H0, 0     
        
-_C3  
+_C3:  
     movf    H0, 0
     xorlw   19
     btfss STATUS, 2 
@@ -523,7 +523,7 @@ DECREMENTO_MINUTO:
     movf   VAR_DISPLAY_MINUTO_DECENA, 0
     movwf PORTC    
 
-__C2   
+__C2:   
     movf    M0, 0
     xorlw   255
     btfss STATUS, 2 
@@ -542,7 +542,7 @@ __C2
     movwf  M0
     movf   M0, 0     
        
-__C3  
+__C3:  
     movf    M0, 0
     xorlw   49
     btfss STATUS, 2 
@@ -558,7 +558,7 @@ __C3
     movf   VAR_DISPLAY_MINUTO_UNIDAD, 0
     movwf PORTC 
     
-__C4  
+__C4:  
     movf    M0, 0
     xorlw   39
     btfss STATUS, 2 
@@ -573,7 +573,7 @@ __C4
     movwf  VAR_DISPLAY_MINUTO_UNIDAD
     movf   VAR_DISPLAY_MINUTO_UNIDAD, 0
     movwf PORTC 
-__C5  
+__C5:  
     movf    M0, 0
     xorlw   29
     btfss STATUS, 2 
@@ -589,7 +589,7 @@ __C5
     movf   VAR_DISPLAY_MINUTO_UNIDAD, 0
     movwf PORTC  
     
-__C6  
+__C6:  
     movf    M0, 0
     xorlw   19
     btfss STATUS, 2 
@@ -706,27 +706,370 @@ _CMIN2:
     btfss   PORTD, 5
     goto    ON
     goto    OFF
-OFF
+OFF:
     bcf	    PORTD, 5
     return
-ON
+ON:
     bsf	    PORTD, 5
     return   
     
 ;   ----------------------------------------------------       
     
+TOGGLE_B1:
+    movf   SELE,0
+    xorlw  6
+    btfss   STATUS, 2
+    goto    _MODODOS
+    goto    _MODOUNO
+    
+_MODODOS:
+    movf   SELE,0
+    xorlw  3
+    btfss   STATUS, 2
+    return
+    goto    _MODOUNO
+    
+_MODOUNO:    
+    movf       BANDERAS_MINUTO2, 0
+    xorlw      0
+    btfss      STATUS, 2
+    goto    __DD2	   ;No
+    goto    TOG__0	   ;Si   
+TOG__0:
+    movlw   1
+    movwf   BANDERAS_MINUTO2
+    return   
+__DD2:
+    movf       BANDERAS_MINUTO2, 0
+    xorlw      1
+    btfss      STATUS, 2
+    goto    __DD3	;No
+    goto    TOG__1	;Si    
+    
+TOG__1:
+    movlw   2
+    movwf   BANDERAS_MINUTO2
+    return
+__DD3:
+    movf       BANDERAS_MINUTO2, 0
+    xorlw      2
+    btfss      STATUS, 2
+    goto     __DD4	;No
+    goto    TOG__2	;Si    
+    
+TOG__2:
+    movlw   3
+    movwf   BANDERAS_MINUTO2
+    return
+__DD4:
+    movf       BANDERAS_MINUTO2, 0
+    xorlw      3
+    btfss      STATUS, 2
+    goto     TOGGLE_B1	;No
+    goto    TOG__3	;Si    
+TOG__3:
+    movlw   0
+    movwf   BANDERAS_MINUTO2
+    return
     
 ;   ----------------------------------------------------    
     
+DISPLAY_VAR_TIMER:
+    movf   SELE,0
+    xorlw  6
+    btfss   STATUS, 2
+    goto    __MODODOS
+    goto    __MODOUNO
+__MODODOS:
+    movf   SELE,0
+    xorlw  3
+    btfss   STATUS, 2
+    return
+    goto    __MODOUNO
+__MODOUNO:    
+    clrf    PORTD
+    movf       BANDERAS_MINUTO2, 0
+    xorlw      0
+    btfss      STATUS, 2
+    goto    ____D2
+    goto    DISPLAY__0
+DISPLAY__0:
+    MOVFW    VAR_DISPLAY_MINUTO2_DECENA
+    call    TABLA_7SEG
+    movwf   PORTC
+    bsf	    PORTD, 2
+    bcf	    PORTD, 0
+    bcf	    PORTD, 1
+    bcf	    PORTD, 3
+    goto    DISP__FIN
+____D2:
+    movf       BANDERAS_MINUTO2, 0
+    xorlw      1
+    btfss      STATUS, 2
+    goto    ____D3
+    goto    DISPLAY__1    
+DISPLAY__1:
+    MOVFW   VAR_DISPLAY_MINUTO2_UNIDAD
+    call    TABLA_7SEG
+    movwf   PORTC
+    bsf	    PORTD, 3 
+    bcf	    PORTD, 0
+    bcf	    PORTD, 1
+    bcf	    PORTD, 2    
+    goto    DISP__FIN 
+____D3:
+    movf       BANDERAS_MINUTO2, 0
+    xorlw      2
+    btfss      STATUS, 2
+    goto    ____D4
+    goto    DISPLAY__2    
+DISPLAY__2:
+    MOVFW   VAR_DISPLAY_SEGUNDO_DECENA
+    call    TABLA_7SEG
+    movwf   PORTC
+    bsf	    PORTD, 1 
+    bcf	    PORTD, 0
+    bcf	    PORTD, 2
+    bcf	    PORTD, 3    
+    goto    DISP__FIN 
+____D4:
+    movf       BANDERAS_MINUTO2, 0
+    xorlw      3
+    btfss      STATUS, 2
+    goto    DISPLAY_VAR_TIMER
+    goto    DISPLAY__3    
+DISPLAY__3:
+    MOVFW    VAR_DISPLAY_SEGUNDO_UNIDAD
+    call    TABLA_7SEG
+    movwf   PORTC
+    bsf	    PORTD, 0 
+    bcf	    PORTD, 2
+    bcf	    PORTD, 1
+    bcf	    PORTD, 3    
+    goto    DISP__FIN 
     
+DISP__FIN:  
+    call    TOGGLE_B1
+    return    
     
 ;   ----------------------------------------------------     
     
+INCREMENTO_MINUTO2:
+    movf   SELE,0
+    xorlw  6
+    btfss   STATUS, 2
+    return
     
+    incf    VAR_DISPLAY_MINUTO2_DECENA, 1
+    incf    M2,1
+    movf    M2,0
+    movf    VAR_DISPLAY_MINUTO2_DECENA, 0
+    xorlw   10
+    btfss STATUS, 2 
+    goto    __C1
+        
+    clrf   VAR_DISPLAY_MINUTO2_DECENA 
+    movf   VAR_DISPLAY_MINUTO2_DECENA, 0
+    movwf PORTC 
     
-;   ----------------------------------------------------     
+    incf   VAR_DISPLAY_MINUTO2_UNIDAD,1
+    movf   VAR_DISPLAY_MINUTO2_UNIDAD, 0
+    movwf  PORTC 
     
+__C1:    
+    movf    M2, 0
+    xorlw   100
+    btfss STATUS, 2 
+    return
+        
+    movlw  0
+    movwf  VAR_DISPLAY_MINUTO2_DECENA
+    movf   VAR_DISPLAY_MINUTO2_DECENA, 0
+    movwf PORTC
+    
+    movlw  0
+    movwf  VAR_DISPLAY_MINUTO2_UNIDAD
+    movf   VAR_DISPLAY_MINUTO2_UNIDAD, 0
+    movwf PORTC   
    
+    movlw  0
+    movwf  M2
+    movf   M2, 0 
+    ;
+    return    
+    
+;   ----------------------------------------------------     
+    
+DECREMENTO_MINUTO2:
+    movf   SELE,0
+    xorlw  6
+    btfss   STATUS, 2
+    return
+    
+    decf    VAR_DISPLAY_MINUTO2_DECENA, 1
+    decf    M2,1
+    movf    M2,0
+    movf    M2, 0
+    xorlw   9
+    btfss STATUS, 2 
+    goto    __CC2
+    
+    clrf   VAR_DISPLAY_MINUTO2_UNIDAD
+    movf   VAR_DISPLAY_MINUTO2_UNIDAD, 0
+    movwf PORTC
+    
+    movlw  9
+    movwf  VAR_DISPLAY_MINUTO2_DECENA
+    movf   VAR_DISPLAY_MINUTO2_DECENA, 0
+    movwf PORTC    
+
+__CC2:   
+    movf    M2, 0
+    xorlw   255
+    btfss STATUS, 2 
+    goto    __CC3
+        
+    movlw  9
+    movwf  VAR_DISPLAY_MINUTO2_DECENA
+    movf   VAR_DISPLAY_MINUTO2_DECENA, 0
+    movwf PORTC
+    
+    movlw  9
+    movwf  VAR_DISPLAY_MINUTO2_UNIDAD
+    movf   VAR_DISPLAY_MINUTO2_UNIDAD, 0
+    
+    movlw  99
+    movwf  M2
+    movf   M2, 0     
+       
+__CC3:  
+    movf    M2, 0
+    xorlw   89
+    btfss STATUS, 2 
+    goto    __CC4  
+        
+    movlw  9
+    movwf  VAR_DISPLAY_MINUTO2_DECENA
+    movf   VAR_DISPLAY_MINUTO2_DECENA, 0
+    movwf PORTC
+    
+    movlw  8
+    movwf  VAR_DISPLAY_MINUTO2_UNIDAD
+    movf   VAR_DISPLAY_MINUTO2_UNIDAD, 0
+    movwf PORTC    
+    
+__CC4:  
+    movf    M2, 0
+    xorlw   79
+    btfss STATUS, 2 
+    goto    __CC5  
+        
+    movlw  9
+    movwf  VAR_DISPLAY_MINUTO2_DECENA
+    movf   VAR_DISPLAY_MINUTO2_DECENA, 0
+    movwf PORTC
+    
+    movlw  7
+    movwf  VAR_DISPLAY_MINUTO2_UNIDAD
+    movf   VAR_DISPLAY_MINUTO2_UNIDAD, 0
+    movwf PORTC 
+    
+__CC5:  
+    movf    M2, 0
+    xorlw   69
+    btfss STATUS, 2 
+    goto    __CC6  
+        
+    movlw  9
+    movwf  VAR_DISPLAY_MINUTO2_DECENA
+    movf   VAR_DISPLAY_MINUTO2_DECENA, 0
+    movwf PORTC
+    
+    movlw  6
+    movwf  VAR_DISPLAY_MINUTO2_UNIDAD
+    movf   VAR_DISPLAY_MINUTO2_UNIDAD, 0
+    movwf PORTC 
+    
+__CC6:  
+    movf    M2, 0
+    xorlw   59
+    btfss STATUS, 2 
+    goto    __CC7  
+        
+    movlw  9
+    movwf  VAR_DISPLAY_MINUTO2_DECENA
+    movf   VAR_DISPLAY_MINUTO2_DECENA, 0
+    movwf PORTC
+    
+    movlw  5
+    movwf  VAR_DISPLAY_MINUTO2_UNIDAD
+    movf   VAR_DISPLAY_MINUTO2_UNIDAD, 0
+    movwf PORTC 
+    
+__CC7:  
+    movf    M2, 0
+    xorlw   49
+    btfss STATUS, 2 
+    goto    __CC8  
+        
+    movlw  9
+    movwf  VAR_DISPLAY_MINUTO2_DECENA
+    movf   VAR_DISPLAY_MINUTO2_DECENA, 0
+    movwf PORTC
+    
+    movlw  4
+    movwf  VAR_DISPLAY_MINUTO2_UNIDAD
+    movf   VAR_DISPLAY_MINUTO2_UNIDAD, 0
+    movwf PORTC  
+    
+__CC8:  
+    movf    M2, 0
+    xorlw   39
+    btfss STATUS, 2 
+    goto    __CC9  
+        
+    movlw  9
+    movwf  VAR_DISPLAY_MINUTO2_DECENA
+    movf   VAR_DISPLAY_MINUTO2_DECENA, 0
+    movwf PORTC
+    
+    movlw  3
+    movwf  VAR_DISPLAY_MINUTO2_UNIDAD
+    movf   VAR_DISPLAY_MINUTO2_UNIDAD, 0
+    movwf PORTC
+    
+__CC9:  
+    movf    M2, 0
+    xorlw   29
+    btfss STATUS, 2 
+    goto    __CC10  
+        
+    movlw  9
+    movwf  VAR_DISPLAY_MINUTO2_DECENA
+    movf   VAR_DISPLAY_MINUTO2_DECENA, 0
+    movwf PORTC
+    
+    movlw  2
+    movwf  VAR_DISPLAY_MINUTO2_UNIDAD
+    movf   VAR_DISPLAY_MINUTO2_UNIDAD, 0
+    movwf PORTC   
+    
+__CC10:  
+    movf    M2, 0
+    xorlw   19
+    btfss STATUS, 2 
+    return
+        
+    movlw  9
+    movwf  VAR_DISPLAY_MINUTO2_DECENA
+    movf   VAR_DISPLAY_MINUTO2_DECENA, 0
+    movwf PORTC
+    
+    movlw  1
+    movwf  VAR_DISPLAY_MINUTO2_UNIDAD
+    movf   VAR_DISPLAY_MINUTO2_UNIDAD, 0
+    movwf PORTC      
+    return   
     
  ;   ---------------------------------------------------- 
  
@@ -761,9 +1104,9 @@ config_tmr0:
     banksel TRISA
     bcf	    T0CS       ;reloj interno
     bcf	    PSA	       ;Prescaler
-    bcf	    PS2
-    bcf	    PS1
-    bcf	    PS0        ; PS = 000   rate 1:2
+    bsf	    PS2
+    bsf	    PS1
+    bsf	    PS0        ; PS = 000   rate 1:256
     banksel PORTA
     reinicio_tmr0
     return
