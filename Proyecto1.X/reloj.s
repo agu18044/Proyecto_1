@@ -608,11 +608,23 @@ __C6
     
 ;   ----------------------------------------------------  
     
-    
+COUNT_10:   
+    decfsz  COUNT10
+    return    
+    movlw   122
+    movwf   COUNT10
+    call    _PARPADEO_LED
+    call    _INCREMENTO_MINUTO
+    return     
     
 ;   ----------------------------------------------------     
     
-    
+_INCREMENTO_MINUTO: ;Incrementando la variable min cada 500ms  
+    incf    MIN, 1
+    btfss   STATUS, 2	 
+    return
+    clrf    MIN
+    return    
     
 ;   ---------------------------------------------------- 
     
