@@ -354,6 +354,48 @@ _S6:
     
 ;   ----------------------------------------------------       
 
+INCREMENTO_HORA:
+    movf   SELE,0
+    xorlw  4
+    btfss   STATUS, 2
+    return
+    
+    incf    VAR_DISPLAY_HORA_DECENA, 1
+    incf    H0,1
+    movf    H0,0
+    movf    VAR_DISPLAY_HORA_DECENA, 0
+    xorlw   10
+    btfss STATUS, 2 
+    goto    _C1
+        
+    clrf   VAR_DISPLAY_HORA_DECENA 
+    movf   VAR_DISPLAY_HORA_DECENA, 0
+    movwf PORTC 
+    
+    incf   VAR_DISPLAY_HORA_UNIDAD,1
+    movf   VAR_DISPLAY_HORA_UNIDAD, 0
+    movwf  PORTC 
+    
+_C1    
+    movf    H0, 0
+    xorlw   24
+    btfss STATUS, 2 
+    return
+        
+    movlw  0
+    movwf  VAR_DISPLAY_HORA_DECENA
+    movf   VAR_DISPLAY_HORA_DECENA, 0
+    movwf PORTC
+    
+    movlw  0
+    movwf  VAR_DISPLAY_HORA_UNIDAD
+    movf   VAR_DISPLAY_HORA_UNIDAD, 0
+    movwf PORTC   
+   
+    movlw  0
+    movwf  H0
+    movf   H0, 0    
+    return
     
 ;   ----------------------------------------------------       
     
