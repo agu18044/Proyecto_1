@@ -2474,7 +2474,7 @@ ENDM
 
 reinicio_tmr0 macro ;macro para el reinicio del tmr 0
  banksel PORTA ;se llama al bank
- movlw 61 ;valor inicial que sera colocado en el tmr0
+ movlw 10 ;valor inicial que sera colocado en el tmr0
  movwf TMR0
  bcf ((INTCON) and 07Fh), 2 ;se resetea el ((INTCON) and 07Fh), 2
  endm
@@ -2483,7 +2483,7 @@ reinicio_tmr1 macro
  banksel TMR1H ;se llama al bank del timer1
  movlw 0xB ;valor inicial que sera colocado en el tmr1
  movwf TMR1H
- movlw 0x47
+ movlw 0x98
  movwf TMR1L
  bcf ((PIR1) and 07Fh), 0
  endm
@@ -2491,14 +2491,12 @@ reinicio_tmr1 macro
 PSECT udata_bank0
   var: DS 1
   banderas: DS 1
-  ;nibble: DS 2
   display_var: DS 4
   UNIDADES: DS 1
   DECENAS: DS 1
-  cont: DS 1
   cont1: DS 1
-  cont2: DS 1
-
+  cont: DS 1
+  bandera2: DS 1
 
 ; VARIABLES
 PSECT udata_shr
@@ -2537,61 +2535,9 @@ pop:
 int_t0:
     reinicio_tmr0
     clrf PORTD
-
-    btfsc banderas, 0
-    goto display_1
-
-    btfsc banderas, 1
-    goto display_2
-
-    btfsc banderas, 2
-    goto display_3
-
-
-display_0:
-    movf display_var, W
-    movwf PORTC
-    bsf PORTD,0
-    goto siguiente_display
-
-display_1:
-    movf display_var+1, W
-    movwf PORTC
-    bsf PORTD,1
-    goto siguiente_display1
-
-display_2:
-    movf display_var+2, W
-    movwf PORTC
-    bsf PORTD,2
-    goto siguiente_display2
-
-display_3:
-    movf display_var+3, W
-    movwf PORTC
-    bsf PORTD,3
-    goto siguiente_display3
-
-siguiente_display:
-    movlw 1
-    xorwf banderas, F
+    incf banderas
     return
-
-siguiente_display1:
-    movlw 3
-    xorwf banderas, F
-    return
-
-siguiente_display2:
-    movlw 6
-    xorwf banderas, F
-    return
-
-siguiente_display3:
-    movlw 4
-    xorwf banderas, F
-    return
-
+# 146 "reloj.s"
 int_t1:
     reinicio_tmr1
     incf UNIDADES
@@ -2629,62 +2575,83 @@ main:
     banksel PORTA
 
 loop:
-    movf UNIDADES, W
-    sublw 10
-    btfsc ((STATUS) and 07Fh), 2
-    call display2
+    ;clrf PORTD
+    btfsc banderas,0
+    call segundo1
 
-    movf cont, W
-    sublw 15
-    btfsc ((STATUS) and 07Fh), 2
-    call display3
+    btfsc banderas, 1
+    call segundo2
 
+    btfsc banderas, 2
+    call minuto1
 
+    ;call preparar_displays
 
-
-
-
-    call preparar_displays
+    clrf bandera2
+    movf cont1, W
+    movwf PORTB
 
     goto loop
 
 ; SUB RUTINAS
 
-display2:
+segundo1:
+    bsf PORTD,0
+    movf UNIDADES, W
+    call tabla
+    movwf display_var+0
+    movf display_var+0, W
+    movwf PORTC
+    movlw 3
+    xorwf banderas, F
+    return
+
+segundo2:
+    bsf PORTD,1
+    movf UNIDADES, W
+    movlw bandera2
+    movf bandera2, W
+    sublw 10
+    btfsc STATUS, 2
+    call display1_inc
+    movf DECENAS, W
+    call tabla
+    movwf display_var+1
+    movf display_var+1, W
+    movwf PORTC
+    movlw 4
+    xorwf banderas, F
+    return
+
+minuto1:
+    movf cont, W
+    movlw bandera2
+    movf cont, W
+    sublw 16
+    btfsc ((STATUS) and 07Fh), 2
+    call display2_inc
+    movf cont1, W
+    call tabla
+    movwf display_var+2
+    return
+
+display1_inc:
     incf DECENAS
     clrf UNIDADES
     return
 
-display3:
+display2_inc:
     incf cont1
     clrf DECENAS
     clrf UNIDADES
     clrf cont
     return
-# 223 "reloj.s"
-preparar_displays:
-    movf UNIDADES, W
-    call tabla
-    movwf display_var
-
-    movf DECENAS, W
-    call tabla
-    movwf display_var+1
-
-    movf cont1, W
-    call tabla
-    movwf display_var+2
-
-    movf cont2, W
-    call tabla
-    movwf display_var+3
-    return
 
 config_reloj:
     banksel OSCCON
     bsf ((OSCCON) and 07Fh), 6
-    bsf ((OSCCON) and 07Fh), 5
-    bcf ((OSCCON) and 07Fh), 4 ;4Mhz
+    bcf ((OSCCON) and 07Fh), 5
+    bsf ((OSCCON) and 07Fh), 4 ;4Mhz
     bsf ((OSCCON) and 07Fh), 0
     return
 
@@ -2692,9 +2659,9 @@ config_tmr0:
     banksel TRISA
     bcf ((OPTION_REG) and 07Fh), 5 ;reloj interno
     bcf ((OPTION_REG) and 07Fh), 3 ;Prescaler
-    bsf ((OPTION_REG) and 07Fh), 2
-    bsf ((OPTION_REG) and 07Fh), 1
-    bsf ((OPTION_REG) and 07Fh), 0 ; PS = 111 rate 1:256
+    bcf ((OPTION_REG) and 07Fh), 2
+    bcf ((OPTION_REG) and 07Fh), 1
+    bcf ((OPTION_REG) and 07Fh), 0 ; PS = 000 rate 1:2
     banksel PORTA
     reinicio_tmr0
     return
@@ -2740,14 +2707,10 @@ config_io:
     clrf PORTB
     clrf UNIDADES
     clrf DECENAS
-    clrf cont
     clrf cont1
-    clrf cont2
     clrf banderas
+    clrf cont
+    clrf bandera2
     return
-
-
-
-
 
 END

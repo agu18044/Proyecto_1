@@ -13,8 +13,8 @@
 %PSECTS
 $build/default/production/reloj.o
 resVect code 0 0 0 3 2
-code CODE 0 0 0 17D 2
-intVect code 0 0 0 42 2
+code CODE 0 0 0 192 2
+intVect code 0 0 0 22 2
 udata_bank0 BANK0 1 20 20 B 1
 udata_shr COMMON 1 70 70 2 1
 config CONFIG 4 2007 2007 2 2
@@ -32,14 +32,14 @@ BANK0 2B-6F 1
 BANK1 A0-EF 1
 BANK2 110-16F 1
 BANK3 190-1EF 1
-CONST 17D-1FFF 2
-ENTRY 17D-1FFF 2
+CONST 192-1FFF 2
+ENTRY 192-1FFF 2
 IDLOC 2000-2003 2
-CODE 17D-1FFF 2
+CODE 192-1FFF 2
 COMMON 72-7F 1
 EEDATA 2100-21FF 2
-STRCODE 17D-1FFF 2
-STRING 17D-1FFF 2
+STRCODE 192-1FFF 2
+STRING 192-1FFF 2
 # %LINETAB Section
 # This section enumerates the file/line to address mappings.
 # The beginning of the section is indicated by %LINETAB.
@@ -54,76 +54,36 @@ STRING 17D-1FFF 2
 # All other numeric values are in decimal.
 %LINETAB
 $build/default/production/reloj.o
-0 intVect code >68:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-4 intVect code >69:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-4 intVect code >70:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-5 intVect code >71:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-6 intVect code >72:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-7 intVect code >74:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-7 intVect code >75:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-8 intVect code >76:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-9 intVect code >77:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-A intVect code >78:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-B intVect code >79:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-B intVect code >80:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-C intVect code >81:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-D intVect code >82:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-E intVect code >83:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-F intVect code >84:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-10 intVect code >88:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-10 intVect code >89:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-15 intVect code >90:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-16 intVect code >92:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-17 intVect code >93:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-18 intVect code >95:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-19 intVect code >96:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-1A intVect code >98:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-1B intVect code >99:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-1C intVect code >102:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-1C intVect code >103:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-1D intVect code >104:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-1E intVect code >105:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-1F intVect code >106:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-20 intVect code >108:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-20 intVect code >109:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-21 intVect code >110:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-22 intVect code >111:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-23 intVect code >112:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-24 intVect code >114:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-24 intVect code >115:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-25 intVect code >116:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-26 intVect code >117:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-27 intVect code >118:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-28 intVect code >120:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-28 intVect code >121:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-29 intVect code >122:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-2A intVect code >123:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-2B intVect code >124:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-2C intVect code >126:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-2C intVect code >127:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-2D intVect code >128:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-2E intVect code >129:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-2F intVect code >131:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-2F intVect code >132:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-30 intVect code >133:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-31 intVect code >134:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-32 intVect code >136:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-32 intVect code >137:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-33 intVect code >138:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-34 intVect code >139:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-35 intVect code >141:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-35 intVect code >142:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-36 intVect code >143:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-37 intVect code >144:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-38 intVect code >146:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-38 intVect code >147:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-3F intVect code >148:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-40 intVect code >149:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-41 intVect code >150:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+0 intVect code >66:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+4 intVect code >67:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+4 intVect code >68:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+5 intVect code >69:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+6 intVect code >70:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+7 intVect code >72:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+7 intVect code >73:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+8 intVect code >74:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+9 intVect code >75:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+A intVect code >76:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+B intVect code >77:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+B intVect code >78:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+C intVect code >79:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+D intVect code >80:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+E intVect code >81:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+F intVect code >82:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+10 intVect code >86:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+10 intVect code >87:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+15 intVect code >88:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+16 intVect code >89:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+17 intVect code >90:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+18 intVect code >146:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+18 intVect code >147:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+1F intVect code >148:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+20 intVect code >149:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+21 intVect code >150:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+0 resVect code >59:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+0 resVect code >60:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
 0 resVect code >61:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-0 resVect code >62:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-0 resVect code >63:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-2 resVect code >64:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+2 resVect code >62:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
 0 code CODE >154:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
 100 code CODE >155:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
 100 code CODE >156:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
@@ -148,99 +108,122 @@ F intVect code >84:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.
 112 code CODE >179:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
 113 code CODE >180:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
 115 code CODE >182:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-115 code CODE >183:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-116 code CODE >184:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-117 code CODE >185:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-118 code CODE >186:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-119 code CODE >188:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-11A code CODE >189:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-11B code CODE >190:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-11C code CODE >191:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-11D code CODE >198:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-11E code CODE >200:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+115 code CODE >184:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+116 code CODE >185:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+117 code CODE >187:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+118 code CODE >188:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+119 code CODE >190:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+11A code CODE >191:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+11B code CODE >195:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+11C code CODE >196:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+11D code CODE >197:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+11E code CODE >199:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+11F code CODE >203:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
 11F code CODE >204:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-11F code CODE >205:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-120 code CODE >206:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-121 code CODE >207:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-122 code CODE >209:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-122 code CODE >210:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-123 code CODE >211:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-124 code CODE >212:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-125 code CODE >213:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-126 code CODE >214:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-127 code CODE >223:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-127 code CODE >224:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-128 code CODE >225:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-129 code CODE >226:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-12A code CODE >228:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-12B code CODE >229:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-12C code CODE >230:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-12D code CODE >232:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-12E code CODE >233:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-12F code CODE >234:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-130 code CODE >236:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-131 code CODE >237:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-132 code CODE >238:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-133 code CODE >239:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-134 code CODE >241:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-134 code CODE >242:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-136 code CODE >243:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-137 code CODE >244:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-138 code CODE >245:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-139 code CODE >246:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-13A code CODE >247:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-13B code CODE >249:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-13B code CODE >250:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-13D code CODE >251:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-13E code CODE >252:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-13F code CODE >253:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-140 code CODE >254:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-141 code CODE >255:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-142 code CODE >256:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-144 code CODE >257:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-149 code CODE >258:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-14A code CODE >260:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-14A code CODE >261:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-14C code CODE >262:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-14D code CODE >263:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-14E code CODE >264:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-14F code CODE >265:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-150 code CODE >266:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-151 code CODE >267:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-152 code CODE >268:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-159 code CODE >269:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-15A code CODE >271:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-15A code CODE >272:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-15C code CODE >273:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-15D code CODE >274:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+120 code CODE >205:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+121 code CODE >206:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+122 code CODE >207:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+123 code CODE >208:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+124 code CODE >209:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+125 code CODE >210:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+126 code CODE >211:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+127 code CODE >212:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+128 code CODE >214:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+128 code CODE >215:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+129 code CODE >216:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+12A code CODE >217:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+12B code CODE >218:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+12C code CODE >219:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+12D code CODE >220:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+12E code CODE >221:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+12F code CODE >222:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+130 code CODE >223:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+131 code CODE >224:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+132 code CODE >225:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+133 code CODE >226:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+134 code CODE >227:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+135 code CODE >228:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+136 code CODE >229:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+137 code CODE >231:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+137 code CODE >232:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+138 code CODE >233:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+139 code CODE >234:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+13A code CODE >235:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+13B code CODE >236:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+13C code CODE >237:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+13D code CODE >238:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+13E code CODE >239:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+13F code CODE >240:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+140 code CODE >241:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+141 code CODE >243:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+141 code CODE >244:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+142 code CODE >245:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+143 code CODE >246:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+144 code CODE >248:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+144 code CODE >249:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+145 code CODE >250:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+146 code CODE >251:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+147 code CODE >252:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+148 code CODE >253:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+149 code CODE >255:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+149 code CODE >256:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+14B code CODE >257:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+14C code CODE >258:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+14D code CODE >259:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+14E code CODE >260:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+14F code CODE >261:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+150 code CODE >263:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+150 code CODE >264:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+152 code CODE >265:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+153 code CODE >266:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+154 code CODE >267:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+155 code CODE >268:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+156 code CODE >269:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+157 code CODE >270:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+159 code CODE >271:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+15E code CODE >272:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+15F code CODE >274:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
 15F code CODE >275:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-160 code CODE >276:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-161 code CODE >277:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-162 code CODE >278:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-163 code CODE >279:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-164 code CODE >280:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-165 code CODE >282:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-165 code CODE >283:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-167 code CODE >284:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-168 code CODE >285:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-169 code CODE >287:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-16B code CODE >288:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-16C code CODE >289:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-16D code CODE >290:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-16E code CODE >291:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-16F code CODE >292:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-170 code CODE >293:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-171 code CODE >295:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-173 code CODE >296:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-174 code CODE >297:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-175 code CODE >298:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-176 code CODE >299:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-177 code CODE >300:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-178 code CODE >301:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-179 code CODE >302:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-17A code CODE >303:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-17B code CODE >304:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
-17C code CODE >305:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+161 code CODE >276:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+162 code CODE >277:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+163 code CODE >278:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+164 code CODE >279:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+165 code CODE >280:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+166 code CODE >281:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+167 code CODE >282:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+16E code CODE >283:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+16F code CODE >285:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+16F code CODE >286:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+171 code CODE >287:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+172 code CODE >288:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+174 code CODE >289:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+175 code CODE >290:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+176 code CODE >291:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+177 code CODE >292:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+178 code CODE >293:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+179 code CODE >294:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+17A code CODE >296:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+17A code CODE >297:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+17C code CODE >298:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+17D code CODE >299:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+17E code CODE >301:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+180 code CODE >302:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+181 code CODE >303:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+182 code CODE >304:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+183 code CODE >305:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+184 code CODE >306:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+185 code CODE >307:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+186 code CODE >309:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+188 code CODE >310:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+189 code CODE >311:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+18A code CODE >312:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+18B code CODE >313:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+18C code CODE >314:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+18D code CODE >315:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+18E code CODE >316:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+18F code CODE >317:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+190 code CODE >318:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
+191 code CODE >319:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.X\reloj.s
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -253,7 +236,7 @@ F intVect code >84:C:\Users\Usuario Dell\Documents\.MICROs\Proyecto_1\Proyecto1.
 # was defined in a psect then <psect> will be "-". File-name
 # is the name of the object file in which the symbol was defined.
 %SYMTAB
-__Hspace_0 17D 0 ABS 0 - -
+__Hspace_0 192 0 ABS 0 - -
 __Hspace_1 72 0 ABS 0 - -
 __Hspace_3 0 0 ABS 0 - -
 __Hspace_4 4010 0 ABS 0 - -
@@ -287,7 +270,7 @@ __Ludata_bank2 0 0 ABS 0 udata_bank2 -
 __Ludata_bank3 0 0 ABS 0 udata_bank3 -
 __Hudata_shr 0 0 ABS 0 udata_shr -
 __Ludata_shr 0 0 ABS 0 udata_shr -
-__HintVect 84 0 code 0 intVect -
+__HintVect 44 0 code 0 intVect -
 # %SPLITSTAB Section
 # This section enumerates all the psect splits performed by the assembler.
 # The beginning of the section is indicated by %SPLITSTAB.
