@@ -628,7 +628,77 @@ _INCREMENTO_MINUTO: ;Incrementando la variable min cada 500ms
     
 ;   ---------------------------------------------------- 
     
+_INCREMENTO_MINUTO2: ;60*2 = 120, MODO1
+    movf    MIN, 0
+    xorlw   120
+    btfss   STATUS, 2
+    return
+    clrf    MIN
+    incf    VAR_DISPLAY_MINUTO_DECENA, 1
+    incf    M0,1
+    movf    M0,0
+    movf    VAR_DISPLAY_MINUTO_DECENA, 0
+    xorlw   10
+    btfss STATUS, 2 
+    return
+        
+    clrf   VAR_DISPLAY_MINUTO_DECENA 
+    movf   VAR_DISPLAY_MINUTO_DECENA, 0
+    movwf PORTC 
     
+    incf   VAR_DISPLAY_MINUTO_UNIDAD,1
+    movf   VAR_DISPLAY_MINUTO_UNIDAD, 0  
+    xorlw   6
+    btfss STATUS, 2 
+    return
+       
+    clrf   VAR_DISPLAY_MINUTO_UNIDAD
+    movf   VAR_DISPLAY_MINUTO_UNIDAD, 0
+    movwf PORTC
+    
+    clrf   VAR_DISPLAY_MINUTO_DECENA
+    movf   VAR_DISPLAY_MINUTO_DECENA, 0
+    movwf PORTC  
+    
+    clrf   M0
+    movf   M0, 0
+    incf    VAR_DISPLAY_HORA_DECENA, 1
+    incf    H0,1
+    movf    H0,0
+    movf    VAR_DISPLAY_HORA_DECENA, 0
+    xorlw   10
+    btfss STATUS, 2 
+    goto    _CMIN2
+        
+    clrf   VAR_DISPLAY_HORA_DECENA 
+    movf   VAR_DISPLAY_HORA_DECENA, 0
+    movwf PORTC 
+    
+    incf   VAR_DISPLAY_HORA_UNIDAD,1
+    movf   VAR_DISPLAY_HORA_UNIDAD, 0
+    movwf  PORTC 
+    
+_CMIN2    
+    movf    H0, 0
+    xorlw   24
+    btfss STATUS, 2 
+    return
+        
+    movlw  0
+    movwf  VAR_DISPLAY_HORA_DECENA
+    movf   VAR_DISPLAY_HORA_DECENA, 0
+    movwf PORTC
+    
+    movlw  0
+    movwf  VAR_DISPLAY_HORA_UNIDAD
+    movf   VAR_DISPLAY_HORA_UNIDAD, 0
+    movwf PORTC   
+   
+    movlw  0
+    movwf  H0
+    movf   H0, 0    
+            
+    return    
     
 ;   ----------------------------------------------------     
 
