@@ -153,9 +153,54 @@ loop:
 
     goto    loop
 
-;   SUB RUTINAS 
+;   ----------------------------------------------------
+TOGGLE_B0:
+    movf       BANDERAS_HORA, 0
+    xorlw      0
+    btfss      STATUS, 2
+    goto    _D2	   ;No
+    goto    TOG_0  ;Si   
+TOG_0:
+    movlw   1
+    movwf   BANDERAS_HORA
+    return   
+_D2:
+    movf       BANDERAS_HORA, 0
+    xorlw      1
+    btfss      STATUS, 2
+    goto    _D3	    ;No
+    goto    TOG_1   ;Si    
+    
+TOG_1:
+    movlw   2
+    movfw   BANDERAS_HORA
+    return
+_D3:
+    movf       BANDERAS_HORA, 0
+    xorlw      2
+    btfss      STATUS, 2
+    goto    _D4	    ;No
+    goto    TOG_2   ;Si    
+    
+TOG_2:
+    movlw   3
+    movfw   BANDERAS_HORA
+    return
+_D4:
+    movf       BANDERAS_HORA, 0
+    xorlw      3
+    btfss      STATUS, 2
+    goto    TOGGLE_B0	;No
+    goto    TOG_3	;Si    
+TOG_3:
+    movlw   0
+    movfw   BANDERAS_HORA
+    return 
+;   ----------------------------------------------------
+   
 
-        
+    
+;   ----------------------------------------------------    
 config_reloj:
     banksel OSCCON
     bsf	    IRCF2
